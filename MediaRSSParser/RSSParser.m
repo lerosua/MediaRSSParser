@@ -323,7 +323,8 @@
       
     } else if ([self matchesDescriptionElement:elementName]) {
       [self.channel setChannelDescription:self.tempString];
-      
+    } else if([self matchesContentElement:elementName]){
+        [self.channel setChannelDescription:self.tempString];
     } else if ([self matchesLanguageElement:elementName]) {
       [self.channel setLanguage:self.tempString];
       
@@ -363,7 +364,8 @@
       
     } else if ([self matchesDescriptionElement:elementName]) {
       [self.currentItem setItemDescription:self.tempString];
-      
+    } else if([self matchesContentElement:elementName]){
+        [self.currentItem setItemDescription:self.tempString];
     } else if ([self matchesAuthorElement:elementName]) {
       [self.currentItem setAuthorEmail:self.tempString];
       
@@ -447,6 +449,11 @@
 - (BOOL)matchesDescriptionElement:(NSString *)elementName
 {
   return [elementName isEqualToString:@"description"];
+}
+
+- (BOOL) matchesContentElement:(NSString *)elementName
+{
+    return  ([elementName isEqualToString:@"content:encoded"] || [elementName isEqualToString:@"content"]);
 }
 
 - (BOOL)matchesLanguageElement:(NSString *)elementName
